@@ -1,0 +1,11 @@
+{
+  "name": "filerouter",
+  "version": "1.0.0",
+  "description": "server file based routing implementation (think, nextjs router)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pkustura",
+  "license": "ISC"
+}
