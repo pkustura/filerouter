@@ -1,5 +1,12 @@
+const layout = require('./layout');
+
 module.exports = (req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Home Page');
+  const content = `
+    <h2>Index</h2>
+    <p>This is the home page.</p>
+    <a href="/about/">about page</a>
+  `;
+  res.setHeader('Content-Type', 'text/html');
+  res.end(layout(content));
 };
 
