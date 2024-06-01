@@ -1,8 +1,16 @@
 // dynamicRoutes.js
 const dynamicRoutes = {
-  '^/user/(?<id>\\d+)$': (req, res, params) => {
-    res.setHeader('Content-Type', 'text/plain');
-    res.end(`User ID: ${params.id}`);
+  '^user/(?<id>\\d+)$': (req, res, params) => {
+    try {
+      // Simulate an error if the user ID is not a specific value
+      if (params.id !== '123') throw new Error('Invalid user ID');
+      res.setHeader('Content-Type', 'text/plain');
+      res.end(`User ID: ${params.id}`);
+    } catch (err) {
+      res.statusCode = 400;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end(`Bad Request: ${err.message}`);
+    }
   }
 };
 
