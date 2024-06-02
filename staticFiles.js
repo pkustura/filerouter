@@ -4,7 +4,10 @@ const path = require('path');
 
 
 const handleStaticFiles = (req, res, cleanPathname) => {
-  const filePath = path.join(__dirname, 'pages', `${cleanPathname}.js`);
+
+  const resolvePath = (pathname) => path.join(__dirname, 'pages', pathname, 'index.js');
+  const filePath = resolvePath(cleanPathname) || path.join(__dirname, 'pages', `${cleanPathname}.js`);  
+
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (!err) {
       try {
