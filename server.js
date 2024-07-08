@@ -18,13 +18,13 @@ const errorHandler = (err, req, res) => {
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
-  const cleanPathname = pathname === '/' ? 'index' : pathname.replace(/^\/|\/$/g, '');
+  const cleanPathname = pathname.replace(/^\/|\/$/g, '');
 
   try {
     applyMiddlewares(req, res, middlewares, () => {
       try {
         if (!handleDynamicRoutes(req, res, cleanPathname)) {
-          handleStaticFiles(req, res, cleanPathname);
+          handleStaticFiles(req, res, cleanPathname || 'index');
         }
       } catch (err) {
         errorHandler(err, req, res);
@@ -33,9 +33,8 @@ const server = http.createServer((req, res) => {
   } catch (err) {
     errorHandler(err, req, res);
   }
-  });
 
-server.listen(port, () => {
+});server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
